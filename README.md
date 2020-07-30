@@ -1,4 +1,5 @@
 # malldemo
+<<<<<<< HEAD
 
 ## Project setup
 ```
@@ -17,3 +18,6 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+vue practice
+>>>>>>> 1263254a86563c40926df8a6933874bd1946d912
