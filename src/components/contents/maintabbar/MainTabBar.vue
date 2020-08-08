@@ -2,40 +2,48 @@
   <tab-bar>
     <tab-bar-item path="/home">
       <!--dom 中使用路径需要用 ~ 来识别配置的别名-->
-      <img slot="item-icon" src="~assets/images/tabbar/home.svg" alt="" />
-      <img
-        slot="item-icon-active"
-        src="~assets/images/tabbar/home_active.svg"
-        alt=""
-      />
-      <div slot="item-text">首页</div>
+      <template v-slot:item-icon>
+        <img src="~assets/images/tabbar/home.svg" alt="" />
+      </template>
+      <template v-slot:item-icon-active>
+        <img src="~assets/images/tabbar/home_active.svg" alt="" />
+      </template>
+      <template v-slot:item-text>
+        <div>首页</div>
+      </template>
     </tab-bar-item>
     <tab-bar-item path="/category">
-      <img slot="item-icon" src="~assets/images/tabbar/category.svg" alt="" />
-      <img
-        slot="item-icon-active"
-        src="~assets/images/tabbar/category_active.svg"
-        alt=""
-      />
-      <div slot="item-text">品类</div>
+      <template v-slot:item-icon>
+        <img src="~assets/images/tabbar/category.svg" alt="" />
+      </template>
+      <template v-slot:item-icon-active>
+        <img src="~assets/images/tabbar/category_active.svg" alt="" />
+      </template>
+      <template v-slot:item-text>
+        <div>品类</div>
+      </template>
     </tab-bar-item>
     <tab-bar-item path="/cart">
-      <img slot="item-icon" src="~assets/images/tabbar/shopcart.svg" alt="" />
-      <img
-        slot="item-icon-active"
-        src="~assets/images/tabbar/shopcart_active.svg"
-        alt=""
-      />
-      <div slot="item-text">购物车</div>
+      <template v-slot:item-icon>
+        <img src="~assets/images/tabbar/shopcart.svg" alt="" />
+      </template>
+      <template v-slot:item-icon-active>
+        <img src="~assets/images/tabbar/shopcart_active.svg" alt="" />
+      </template>
+      <template v-slot:item-text>
+        <div>购物车</div>
+      </template>
     </tab-bar-item>
-    <tab-bar-item path="/me">
-      <img slot="item-icon" src="~assets/images/tabbar/profile.svg" alt="" />
-      <img
-        slot="item-icon-active"
-        src="~assets/images/tabbar/profile_active.svg"
-        alt=""
-      />
-      <div slot="item-text">我的</div>
+    <tab-bar-item path="/profile">
+      <template v-slot:item-icon>
+        <img src="~assets/images/tabbar/profile.svg" alt="" />
+      </template>
+      <template v-slot:item-icon-active>
+        <img src="~assets/images/tabbar/profile_active.svg" alt="" />
+      </template>
+      <template v-slot:item-text>
+        <div>我的</div>
+      </template>
     </tab-bar-item>
   </tab-bar>
 </template>
@@ -48,8 +56,8 @@ export default {
   name: "MainTarBar",
   components: {
     TabBar,
-    TabBarItem,
-  },
+    TabBarItem
+  }
 };
 </script>
 

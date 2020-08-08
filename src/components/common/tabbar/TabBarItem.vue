@@ -14,11 +14,12 @@ export default {
   props: {
     path: {
       type: String,
+      required: true
     },
     activeStyle: {
       type: String,
-      default: "coral",
-    },
+      default: "coral"
+    }
   },
   data() {
     return {};
@@ -26,7 +27,7 @@ export default {
   methods: {
     itemClick() {
       this.$router.replace(this.path);
-    },
+    }
   },
   computed: {
     isActive() {
@@ -34,8 +35,8 @@ export default {
     },
     isStyleActive() {
       return this.isActive ? { color: this.activeStyle } : {};
-    },
-  },
+    }
+  }
 };
 </script>
 
