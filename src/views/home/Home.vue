@@ -10,14 +10,26 @@
 
 <script>
 import NavBar from "@/components/common/navbar/NavBar";
+import { getHomeMultidata } from "network/home.js";
 export default {
   name: "Home",
   components: {
     NavBar
   },
   data() {
-    return {};
+    return {
+      banner: [],
+      recommends: []
+    };
   },
+  created() {
+    getHomeMultidata().then(res => {
+      console.log(res);
+      this.banner = res.data.data.banner.list;
+      this.recommends = res.data.data.recommend.list;
+    });
+  },
+
   computed: {},
   methods: {}
 };
