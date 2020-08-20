@@ -1,5 +1,13 @@
 <template>
-  <div></div>
+  <div>
+    <swiper class="home-swiper">
+      <swiper-item v-for="(item, index) in bannerdata" :key="index">
+        <a :href="item.link">
+          <img :src="item.image" alt="" @load="swiperImgLoaded" />
+        </a>
+      </swiper-item>
+    </swiper>
+  </div>
 </template>
 
 <script>
@@ -11,11 +19,23 @@ export default {
     Swiper,
     SwiperItem
   },
+  props: {
+    bannerdata: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
   data() {
     return {};
   },
-  computed: {},
-  methods: {}
+  methods: {
+    //图片加载完成提示
+    swiperImgLoaded() {
+      this.$emit("swiperImgLoaded");
+    }
+  }
 };
 </script>
 
