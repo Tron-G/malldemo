@@ -48,6 +48,7 @@ export default {
 .recommend-item img {
   width: 90%;
   margin-bottom: 5px;
+  border-radius: 40px;
   /* height: 65px; */
 }
 

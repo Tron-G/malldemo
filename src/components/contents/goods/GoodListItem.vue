@@ -37,20 +37,24 @@ export default {
   /* margin-top: 10px; */
   width: 48%;
   height: auto;
+  border: 2px solid #f4f4f4;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 5px;
 }
 .goods-item img {
   width: 100%;
   height: auto;
   border-radius: 5px;
   background-size: cover;
-  border: 2px solid #fff;
 }
 
 .goods-info {
   font-size: 12px;
   overflow: hidden;
+  padding: 5px;
   position: absolute;
-  bottom: 3px;
+  bottom: -2px;
   left: 0;
   right: 0;
 }
@@ -62,8 +66,8 @@ export default {
 }
 .goods-info .price {
   color: var(--color-high-text);
-  /* color: red; */
-  margin-right: 25px;
+  position: absolute;
+  left: 5px;
   font-weight: bold;
 }
 .price::before {
@@ -72,6 +76,7 @@ export default {
 
 .goods-info .collect {
   position: relative;
+  left: 65px;
 }
 
 .goods-info .collect::before {
