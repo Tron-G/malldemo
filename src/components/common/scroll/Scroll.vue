@@ -19,17 +19,48 @@ export default {
       scroll: null
     };
   },
+  props: {
+    probeType: {
+      type: Number,
+      default: 0
+    },
+    pullUpLoad: {
+      type: Boolean,
+      default: false
+    }
+  },
   methods: {
     init() {
       this.$nextTick(() => {
         this.scroll = new BScroll(this.$refs.wrapper, {
-          click: true
+          click: true,
+          probeType: this.probeType,
+          pullUpLoad: this.pullUpLoad
         });
+
+        this.scroll.on("scroll", pos => {
+          this.$emit("position", pos);
+        });
+
+        this.scroll.on("pullingUp", () => {
+          this.$emit("pullingUp");
+        });
+      });
+    },
+    scrollTo(x, y, time = 500) {
+      this.scroll.scrollTo(x, y, time);
+    },
+    //准备下一次上拉加载并且刷新
+    finishPullUp() {
+      this.scroll.finishPullUp();
+      this.$nextTick(() => {
+        this.scroll.refresh();
       });
     }
   },
   mounted() {
     this.init();
+    //主动刷新
     setTimeout(() => {
       this.$nextTick(() => {
         this.scroll.refresh();

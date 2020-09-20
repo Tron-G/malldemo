@@ -6,7 +6,14 @@
       </template>
     </nav-bar>
 
-    <scroll class="content">
+    <scroll
+      class="content"
+      ref="scroll"
+      :probe-type="3"
+      :pull-up-load="true"
+      @position="contentScroll"
+      @pullingUp="loadMore"
+    >
       <home-swiper
         :bannerdata="banners"
         class="swiper"
@@ -19,7 +26,11 @@
         @tabClick="tabClick"
       ></tab-control>
       <good-list :goods="showTabGoods" />
+
+      <div class="refreshMsg" v-show="isShowBackTop">上拉加载更多</div>
     </scroll>
+
+    <back-top @click.native="backToTop" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -28,12 +39,15 @@ import NavBar from "@/components/common/navbar/NavBar";
 import TabControl from "@/components/contents/tabControl/TabControl";
 import GoodList from "@/components/contents/goods/GoodList";
 import Scroll from "@/components/common/scroll/Scroll";
+import backTop from "@/components/contents/backTop/backTop";
 
 import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "./childComps/RecommendView";
 import FeatureView from "./childComps/FeatureView";
 
 import { getHomeMultidata, getHomeGoods } from "network/home.js";
+import { SHOWTOPBUTTONDIST } from "commonjs/const";
+
 export default {
   name: "Home",
   components: {
@@ -41,6 +55,7 @@ export default {
     TabControl,
     GoodList,
     Scroll,
+    backTop,
     HomeSwiper,
     RecommendView,
     FeatureView
@@ -54,7 +69,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      currentType: "pop"
+      currentType: "pop",
+      isShowBackTop: false
     };
   },
   created() {
@@ -81,6 +97,21 @@ export default {
       }
     },
     swiperImgLoad() {},
+    //回到顶部
+    backToTop() {
+      this.$refs.scroll.scrollTo(0, 0);
+    },
+    //回到顶部按钮隐藏
+    contentScroll(pos) {
+      this.isShowBackTop = -pos.y > SHOWTOPBUTTONDIST ? true : false;
+    },
+    //上拉加载更多
+    loadMore() {
+      setTimeout(() => {
+        console.log("pull up");
+        this.getHomeGoods(this.currentType);
+      }, 1000);
+    },
     /*
     网络请求
     */
@@ -96,9 +127,10 @@ export default {
     getHomeGoods(type) {
       const page = this.goods[type].page + 1;
       getHomeGoods(type, page).then(res => {
-        console.log(type, res);
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
+
+        this.$refs.scroll.finishPullUp();
       });
     }
   },
@@ -131,10 +163,22 @@ export default {
 .content {
   position: absolute;
   left: 0;
-  top: 44px;
+  right: 0;
+  top: 43px;
+  bottom: 49px;
   overflow: hidden;
   background-color: #f4f4f4;
-  height: calc(100% - 49px);
+  /* height: calc(100% - 93px); */
   /* height: 450px; */
+}
+
+.refreshMsg {
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  line-height: 40px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  font-style: oblique;
 }
 </style>
