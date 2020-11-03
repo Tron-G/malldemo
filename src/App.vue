@@ -9,12 +9,13 @@
 </template>
 
 <script>
+//git test
 import MainTabBar from "components/contents/maintabbar/MainTabBar";
 export default {
   name: "App",
   components: {
-    MainTabBar
-  }
+    MainTabBar,
+  },
 };
 </script>
 
